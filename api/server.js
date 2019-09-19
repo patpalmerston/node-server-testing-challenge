@@ -7,7 +7,7 @@ configureMiddleware(server);
 
 // sanity check
 server.get('/', (req, res) => {
-	res.send(`<h2>Server Live</h2>`);
+	res.status(200).json({ api: 'up'});
 });
 
 module.exports = server;
