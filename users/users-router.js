@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
 		});
 });
 
+router.get('/:id', (req, res) => {
+	const { id } = req.params;
+	Users.findById(id)
+		.then(user => {
+			res.status(200).json(user);
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ error: 'could not find users' });
+		});
+});
+
 router.post('/', (req, res) => {
 	const userData = req.body;
 	Users.add(userData)
@@ -23,6 +35,19 @@ router.post('/', (req, res) => {
 		.catch(err => {
 			console.log(err);
 			res.status(500).json({ error: 'can not make user' });
+		});
+});
+
+router.delete('/:id', (req, res) => {
+	const { id } = req.params;
+
+	Users.remove(id)
+		.then(deleted => {
+			res.status(204).json({ removed: deleted });
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(500).json({ error: 'failed to delete user' });
 		});
 });
 module.exports = router;

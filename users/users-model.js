@@ -23,8 +23,10 @@ function findById(id) {
 		.where({ id })
 		.first();
 }
-function remove() {
-	return null;
+function remove(id) {
+	return db('users')
+		.where('id', id)
+		.del();
 }
 function update() {
 	return null;
